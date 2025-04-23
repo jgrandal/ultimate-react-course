@@ -23,7 +23,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   } = movieDetails;
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
-
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
   )?.userRating;
@@ -69,6 +68,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     },
     [title]
   );
+
   useEffect(
     function () {
       function callback(e) {

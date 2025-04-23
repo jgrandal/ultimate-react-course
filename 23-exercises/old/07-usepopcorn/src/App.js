@@ -60,7 +60,7 @@ import WatchedMovieList from './components/WatchedMovieList';
 
 const APIKEY = 'b442b664';
 
-export default function App() {
+function App() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
@@ -178,3 +178,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;
