@@ -83,20 +83,19 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <p>We make the best pizza in town</p>
-      {/* {numPizzas > 0 && (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza key={pizza.name} pizzaObj={pizza} />
-          ))}
-        </ul>
-      )} */}
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzaData.map((pizza) => (
-            <Pizza key={pizza.name} pizzaObj={pizza} />
-          ))}
-        </ul>
+        <>
+          <p>
+            We make the best pizza in town. Authentic Italian cuisine. 6
+            creatives dishes to choose from. All of them are made with love and
+            passion.
+          </p>
+          <ul className="pizzas">
+            {pizzaData.map((pizza) => (
+              <Pizza key={pizza.name} pizzaObj={pizza} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We're still working on our menu. Please, come back later :\</p>
       )}
@@ -119,15 +118,18 @@ function Pizza({ pizzaObj }) {
   // Takeaways:
   // - Use early returns to avoid deeply nested code
   // - Use early returns to return something entirely different no matter it's just nothing or a different component
-  if (pizzaObj.soldOut) return null;
+  // if (pizzaObj.soldOut) return null;
 
   return (
-    <li className="pizza">
+    <li
+      // className={`pizza ${pizzaObj.soldOut ? 'sold-out' : ''}`}
+      className={`pizza ${pizzaObj.soldOut && 'sold-out'}`}
+    >
       <img src={pizzaObj.photoName} alt={`Pizza ${pizzaObj.name}`} />
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <span>{pizzaObj.soldOut ? 'SOLD OUT' : pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -136,11 +138,11 @@ function Pizza({ pizzaObj }) {
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 12;
-  const closeHour = 2;
-  const isOpen = hour >= openHour && hour <= closeHour;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour < closeHour;
 
-  // Early return is more useful when you want to render entire components conditionally
-  // Early return should not be used if you want to render just some pieces of JSX
+  // Takeaway: Early return is more useful when you want to render entire components conditionally
+  // Takeaway: Early return should not be used if you want to render just some pieces of JSX
   // if (!isOpen) {
   //   return (
   //     <footer className="footer">
@@ -158,10 +160,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
-          <button className="btn">Order</button>
-        </div>
+        <Order openHour={openHour} closeHour={closeHour} />
       ) : (
         <p>
           We're happy to welcome you between {openHour}:00 and {closeHour}:00.
@@ -170,9 +169,19 @@ function Footer() {
           </span>
         </p>
       )}
-      {/* {new Date().toLocaleTimeString()} .We're currently open. */}
-      {/* <p>All rights reserved</p> */}
     </footer>
+  );
+}
+
+function Order({ openHour, closeHour }) {
+  return (
+    <div className="order">
+      <p>
+        We're open from {openHour}:00 to {closeHour}:00. Come visit us or order
+        online.
+      </p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
