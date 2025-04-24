@@ -17,6 +17,56 @@ function App() {
   );
 }
 
+function Avatar() {
+  return (
+    <img
+      className="avatar"
+      src="https://i.imgur.com/eUijyrx.png"
+      alt="Avatar"
+    />
+  );
+}
+
+function Intro() {
+  return (
+    <div>
+      <h1>Jorge Granda</h1>
+      <p>
+        Full-stack web developer and consultant at WiQU. When not coding or
+        consulting, I enjoy playing video games and watching new courses.
+      </p>
+    </div>
+  );
+}
+
+function SkillList() {
+  const skills = [
+    { name: 'HTML+CSS', emoji: '👌', color: 'blue' },
+    { name: 'JavaScript', emoji: '👌', color: 'yellow' },
+    { name: 'Web Design', emoji: '👌', color: 'lightgreen' },
+    { name: 'React', emoji: '👌', color: 'lightblue' },
+    { name: 'Git and GitHub', emoji: '👌', color: 'grey' },
+  ];
+
+  return (
+    <ul className="skill-list">
+      {skills.map((skill) => (
+        <Skill key={skill.name} skillObj={skill} />
+      ))}
+    </ul>
+  );
+}
+
+function Skill({ skillObj }) {
+  const { name, emoji, color } = skillObj;
+  return (
+    <li className="skill" style={{ backgroundColor: color }}>
+      <span>{name}</span>
+      <span>{emoji}</span>
+    </li>
+  );
+}
+
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
