@@ -2,6 +2,14 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
+const skills = [
+  { skill: 'HTML+CSS', level: 'advanced', color: 'blue' },
+  { skill: 'JavaScript', level: 'advanced', color: 'yellow' },
+  { skill: 'Web Design', level: 'intermediate', color: 'lightgreen' },
+  { skill: 'React', level: 'intermediate', color: 'lightblue' },
+  { skill: 'Git and GitHub', level: 'beginner', color: 'grey' },
+];
+
 function App() {
   return (
     <div className="card">
@@ -40,29 +48,34 @@ function Intro() {
 }
 
 function SkillList() {
-  const skills = [
-    { name: 'HTML+CSS', emoji: '👌', color: 'blue' },
-    { name: 'JavaScript', emoji: '👌', color: 'yellow' },
-    { name: 'Web Design', emoji: '👌', color: 'lightgreen' },
-    { name: 'React', emoji: '👌', color: 'lightblue' },
-    { name: 'Git and GitHub', emoji: '👌', color: 'grey' },
-  ];
-
   return (
     <ul className="skill-list">
       {skills.map((skill) => (
-        <Skill key={skill.name} skillObj={skill} />
+        <Skill key={skill.skill} skillObj={skill} />
       ))}
     </ul>
   );
 }
 
 function Skill({ skillObj }) {
-  const { name, emoji, color } = skillObj;
+  const { skill, level, color } = skillObj;
   return (
     <li className="skill" style={{ backgroundColor: color }}>
-      <span>{name}</span>
-      <span>{emoji}</span>
+      <span>{skill}</span>
+      {/* <span>
+        {level === 'advanced' && '💪'}
+        {level === 'intermediate' && '👌'}
+        {level === 'beginner' && '👶'}
+      </span> */}
+      <span>
+        {level === 'advanced'
+          ? '💪'
+          : level === 'intermediate'
+          ? '👌'
+          : level === 'beginner'
+          ? '👶'
+          : ''}
+      </span>
     </li>
   );
 }
