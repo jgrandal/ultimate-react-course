@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const messages = [
   'Learn React ⚛️',
   'Apply for jobs 💼',
@@ -5,14 +7,38 @@ const messages = [
 ];
 
 function App() {
-  const step = 1;
+  // Simulating a step state
+  // In a real application, this would be managed by React's useState
+  // For this example, we'll just use a constant to simulate the current step
+  // const step = 1;
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <>
+      <button className="close" onClick={() => setIsOpen(!isOpen)}>
+        &times;
+      </button>
+      {isOpen && <Steps />}
+    </>
+  );
+}
+
+function Steps() {
+  const [step, setStep] = useState(1);
 
   function handlePrevious() {
-    console.log('Previous step clicked');
+    if (step > 1) {
+      setStep(step - 1);
+      // console.log('Previous step:', step - 1);
+    }
   }
 
   function handleNext() {
-    console.log('Next step clicked');
+    if (step < messages.length) {
+      setStep(step + 1);
+      // console.log('Next step:', step + 1);
+    }
   }
 
   return (
