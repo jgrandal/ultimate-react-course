@@ -22,22 +22,22 @@ function Counter() {
 
   function handleStepDecrement() {
     if (step > 1) {
-      setStep(step - 1);
+      setStep((step) => step - 1);
     }
   }
 
   function handleStepIncrement() {
     if (step >= 1) {
-      setStep(step + 1);
+      setStep((step) => step + 1);
     }
   }
 
   function handleCountDecrement() {
-    setCount(count - step);
+    setCount((count) => count - step);
   }
 
   function handleCountIncrement() {
-    setCount(count + step);
+    setCount((count) => count + step);
   }
 
   return (
