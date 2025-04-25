@@ -13,6 +13,13 @@ function Counter() {
   const [step, setStep] = useState(1);
   const [count, setCount] = useState(0);
 
+  // const date = new Date(
+  //   Date.now() + count * 24 * 60 * 60 * 1000
+  // ).toDateString();
+
+  const date = new Date('june 21 2027');
+  date.setDate(date.getDate() + count);
+
   function handleStepDecrement() {
     if (step > 1) {
       setStep(step - 1);
@@ -50,8 +57,9 @@ function Counter() {
           ? 'Today is '
           : count > 0
           ? `${count} days from today is `
-          : `${count} days ago was `}
-        {new Date(Date.now() + count * 24 * 60 * 60 * 1000).toDateString()}
+          : `${Math.abs(count)} days ago was `}
+        {/* {new Date(Date.now() + count * 24 * 60 * 60 * 1000).toDateString()} */}
+        {date.toDateString()}
       </p>
     </>
   );
