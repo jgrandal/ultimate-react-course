@@ -1,12 +1,5 @@
+import { useState } from 'react';
 import './styles.css';
-
-export default function App() {
-  return (
-    <div className="App">
-      <FlashCards />
-    </div>
-  );
-}
 
 const questions = [
   {
@@ -42,6 +35,72 @@ const questions = [
   },
 ];
 
-function FlashCards() {
-  return <div>TODO</div>;
+function App() {
+  return (
+    <div className="App">
+      <FlashCards />
+    </div>
+  );
 }
+
+function FlashCards() {
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handleClick(id) {
+    setSelectedId(id !== selectedId ? id : null);
+    // setSelectedId((selectedId) => (selectedId === id ? null : id));
+  }
+
+  return (
+    <div className="flashcards">
+      {questions.map((question) => (
+        <div
+          key={question.id}
+          onClick={() => handleClick(question.id)}
+          className={selectedId === question.id ? 'selected' : ''}
+        >
+          {selectedId === question.id ? (
+            <p>{question.answer}</p>
+          ) : (
+            <p>{question.question}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// function FlashCards() {
+//   const [flippedCardId, setFlippedCardId] = useState(null);
+
+//   function handleCardClick(id) {
+//     setFlippedCardId((flippedCardId) => (flippedCardId === id ? null : id));
+//   }
+
+//   return (
+//     <div className="flashcards">
+//       {questions.map((question) => (
+//         <Card
+//           key={question.id}
+//           question={question}
+//           isFlipped={flippedCardId === question.id}
+//           onCardClick={handleCardClick}
+//         />
+//       ))}
+//     </div>
+//   );
+// }
+
+// function Card({ question, isFlipped, onCardClick }) {
+//   function handleClick() {
+//     onCardClick(question.id);
+//   }
+
+//   return (
+//     <div onClick={handleClick} className={isFlipped ? 'selected' : ''}>
+//       {isFlipped ? <p>{question.answer}</p> : <p>{question.question}</p>}
+//     </div>
+//   );
+// }
+
+export default App;
