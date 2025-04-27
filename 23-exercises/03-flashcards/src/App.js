@@ -47,8 +47,7 @@ function FlashCards() {
   const [selectedId, setSelectedId] = useState(null);
 
   function handleClick(id) {
-    setSelectedId(id !== selectedId ? id : null);
-    // setSelectedId((selectedId) => (selectedId === id ? null : id));
+    setSelectedId((selectedId) => (selectedId === id ? null : id));
   }
 
   return (
@@ -70,6 +69,7 @@ function FlashCards() {
   );
 }
 
+// Alternative implementation using a separate Card component
 // function FlashCards() {
 //   const [flippedCardId, setFlippedCardId] = useState(null);
 
