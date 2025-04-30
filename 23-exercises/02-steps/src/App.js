@@ -38,7 +38,7 @@ function Steps() {
             <div className={step >= 2 ? 'active' : ''}>2</div>
             <div className={step >= 3 ? 'active' : ''}>3</div>
           </div>
-          <p className="message">{messages[step - 1]}</p>
+          <StepMessage step={step}>{messages[step - 1]}</StepMessage>
           <div className="buttons">
             {/* <Button
               textColor="#fff"
@@ -67,15 +67,14 @@ function Steps() {
   );
 }
 
-// Building a reusable Button Component
-// function Button({ textColor, bgColor, onClick, text, emoji, side }) {
-//   return (
-//     <button
-//       style={{ backgroundColor: bgColor, color: textColor }}
-//       onClick={onClick}
-//     ></button>
-//   );
-// }
+// Building a reusable StepsMessage Component
+function StepMessage({ step, children }) {
+  return (
+    <div className="message">
+      <h3>Step {step}</h3> {children}
+    </div>
+  );
+}
 
 // Building a reusable Button Component with children prop
 // Children prop, instead of text, emoji, side that are referring to the content of the button element
@@ -92,5 +91,15 @@ function Button({ textColor, bgColor, onClick, children }) {
     </button>
   );
 }
+
+// Building a reusable Button Component
+// function Button({ textColor, bgColor, onClick, text, emoji, side }) {
+//   return (
+//     <button
+//       style={{ backgroundColor: bgColor, color: textColor }}
+//       onClick={onClick}
+//     ></button>
+//   );
+// }
 
 export default App;
